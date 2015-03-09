@@ -97,7 +97,7 @@ function linechart() {
             .attr("class", "seasonTitle")
             .attr("x", 0.17 * width)
             .attr("y", height + padding)
-            .html(function (d) {
+            .text(function (d) {
                 return "Season 1";
             })
         svg.append("g")
@@ -105,7 +105,7 @@ function linechart() {
             .attr("class", "seasonTitle")
             .attr("x", 0.63 * width)
             .attr("y", height + padding)
-            .html(function (d) {
+            .text(function (d) {
                 return "Season 2";
             })
 

@@ -73,7 +73,7 @@ function ganttoverlap(id) {
         .attr("y", function (d) {
             return y(6) + 6;
         })
-        .html(function (d) {
+        .text(function (d) {
             return "Season 1";
         });
     svg.append("g")
@@ -83,7 +83,7 @@ function ganttoverlap(id) {
         .attr("y", function (d) {
             return y(16) + 6;
         })
-        .html(function (d) {
+        .text(function (d) {
             return "Season 2";
         });
     svg.append("g")
@@ -93,7 +93,7 @@ function ganttoverlap(id) {
             return x(0);
         })
         .attr("y", height + 30)
-        .html(function (d) {
+        .text(function (d) {
             return "Timeline of Episode";
         });
     svg.append("g")
@@ -103,7 +103,7 @@ function ganttoverlap(id) {
             return x(0) - 25;
         })
         .attr("y", -5)
-        .html(function (d) {
+        .text(function (d) {
             return "Episode";
         });
 

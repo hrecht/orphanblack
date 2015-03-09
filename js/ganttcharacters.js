@@ -87,7 +87,7 @@ function ganttcharacters() {
             .attr("y", function (d) {
                 return y(5) + 8;
             })
-            .html(function (d) {
+            .text(function (d) {
                 return "Season 1";
             });
         svg.append("g")
@@ -97,7 +97,7 @@ function ganttcharacters() {
             .attr("y", function (d) {
                 return y(15) + 8;
             })
-            .html(function (d) {
+            .text(function (d) {
                 return "Season 2";
             });
 
