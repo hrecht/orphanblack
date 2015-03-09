@@ -20,10 +20,6 @@ function ganttcharacters() {
         .domain([0, 40])
         .range([padding, width]);
 
-    var barcolor = d3.scale.ordinal()
-        .domain(["Sarah", "Beth", "Katja", "Alison", "Cosima", "Helena", "Rachel", "Tony"])
-        .range(["#712164", "#d7dddb", "#ffff99", "#e76278", "#4f8a83", "#fac699", "#3A4900", "#666"]);
-
     var xAxis = d3.svg.axis()
         .scale(x)
         .tickSize(height)
@@ -142,9 +138,6 @@ function ganttcharacters() {
             .attr("width", function (d) {
                 return x(d.stopmin) - x(d.startmin);
             })
-            //.attr("fill", function (d) {
-            //    return barcolor(d.character);
-            //})
             .attr("fill", "#1B3536")
             .attr("opacity", 0.5)
             .on('mouseover', tip.show)

@@ -61,7 +61,7 @@ function barcharts() {
             return d.episode;
         }));
 
-        // Add an SVG element for each character, with the desired dimensions and margin.
+        // Add an SVG for each character
         var svg = d3.select("#barcharts").selectAll("svg")
             .data(characters)
             .enter()
@@ -118,9 +118,6 @@ function barcharts() {
                 return d.key
             });
 
-        // Accessing nested data: https://groups.google.com/forum/#!topic/d3-js/kummm9mS4EA
-        // data(function(d) {return d.values;}) 
-        // this will dereference the values for nested data for each group
         svg.selectAll(".bar")
             .data(function (d) {
                 return d.values;

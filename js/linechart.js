@@ -21,11 +21,6 @@ function linechart() {
         .domain([10.5])
         .range(["#712164", "#4f8a83"]);
 
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient("bottom")
-        .ticks(20);
-
     var yAxis = d3.svg.axis()
         .scale(y)
         .tickSize(-width)
@@ -58,11 +53,6 @@ function linechart() {
         //    return d.tmaspct;
         //})]);
         y.domain([0, 1.3]);
-
-        //var gx = svg.append("g")
-        //    .attr("class", "x axis")
-        //    .attr("transform", "translate(0," + height + ")")
-        //    .call(xAxis);
 
         var gy = svg.append("g")
             .attr("class", "y axis")
