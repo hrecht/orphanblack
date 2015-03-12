@@ -1,13 +1,15 @@
-function linechart() {
+function linedraw() {
     var margin = {
-            top: 20,
-            right: 20,
-            bottom: 70,
-            left: 40
-        },
-        width = 500 - margin.left - margin.right,
-        height = 350 - margin.top - margin.bottom,
+        top: 20,
+        right: 20,
+        bottom: 20,
+        left: 40
+    };
+    var width = $linechart.width() - margin.left - margin.right,
+        height = Math.ceil((width * linechart_aspect_height) / linechart_aspect_width) - margin.top - margin.bottom,
         padding = 20;
+
+    $linechart.empty();
 
     var formatPct = d3.format("%");
 
@@ -41,65 +43,59 @@ function linechart() {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.csv("data/totaltime.csv", function (error, data) {
-
-        data.forEach(function (d) {
-            d.episode = d.episode;
-            d.tmaspct = +d.tmaspct;
-        });
-
-        x.domain([1, 20]);
-        //y.domain([0, d3.max(data, function (d) {
-        //    return d.tmaspct;
-        //})]);
-        y.domain([0, 1.3]);
-
-        var gy = svg.append("g")
-            .attr("class", "y axis")
-            .call(yAxis);
-
-        gy.selectAll("g").filter(function (d) {
-                return d;
-            })
-            .classed("minor", true);
-
-        svg.append("path")
-            .attr("class", "chartline")
-            .attr("d", line(data));
-
-        svg.selectAll("dot")
-            .data(data)
-            .enter().append("circle")
-            .attr("r", 4)
-            .attr("fill", function (d) {
-                return dotcolor(d.episode);
-            })
-            .attr("cx", function (d) {
-                return x(d.episode);
-            })
-            .attr("cy", function (d) {
-                return y(d.tmaspct);
-            });
-
-        //Season labels for x axis
-        svg.append("g")
-            .append("text")
-            .attr("class", "seasonTitle")
-            .attr("x", 0.17 * width)
-            .attr("y", height + padding)
-            .text(function (d) {
-                return "Season 1";
-            })
-        svg.append("g")
-            .append("text")
-            .attr("class", "seasonTitle")
-            .attr("x", 0.63 * width)
-            .attr("y", height + padding)
-            .text(function (d) {
-                return "Season 2";
-            })
-
+    data.forEach(function (d) {
+        d.episode = d.episode;
+        d.tmaspct = +d.tmaspct;
     });
 
+    x.domain([1, 20]);
+    //y.domain([0, d3.max(data, function (d) {
+    //    return d.tmaspct;
+    //})]);
+    y.domain([0, 1.3]);
+
+    var gy = svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    gy.selectAll("g").filter(function (d) {
+            return d;
+        })
+        .classed("minor", true);
+
+    svg.append("path")
+        .attr("class", "chartline")
+        .attr("d", line(data));
+
+    svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("r", 4)
+        .attr("fill", function (d) {
+            return dotcolor(d.episode);
+        })
+        .attr("cx", function (d) {
+            return x(d.episode);
+        })
+        .attr("cy", function (d) {
+            return y(d.tmaspct);
+        });
+
+    //Season labels for x axis
+    svg.append("g")
+        .append("text")
+        .attr("class", "seasonTitle")
+        .attr("x", 0.17 * width)
+        .attr("y", height + padding)
+        .text(function (d) {
+            return "Season 1";
+        })
+    svg.append("g")
+        .append("text")
+        .attr("class", "seasonTitle")
+        .attr("x", 0.63 * width)
+        .attr("y", height + padding)
+        .text(function (d) {
+            return "Season 2";
+        })
 }
-linechart()

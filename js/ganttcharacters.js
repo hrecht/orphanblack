@@ -1,14 +1,26 @@
-function ganttcharacters() {
+function ganttdraw() {
 
     var margin = {
-            top: 45,
-            right: 35,
-            bottom: 60,
-            left: 35
-        },
-        width = 380 - margin.left - margin.right,
-        height = 280 - margin.top - margin.bottom,
+        top: 45,
+        right: 35,
+        bottom: 20,
+        left: 35
+    };
+
+    if ($gantt.width() < mobile_threshold) {
+        var width = $gantt.width() - margin.left - margin.right;
+    }
+    else if (mobile_threshold <= $gantt.width() && $gantt.width() < 1000 ) {
+        var width = ($gantt.width() - margin.left - margin.right) / 2.3;
+    }
+    else {
+        var width = ($gantt.width() - margin.left - margin.right) / 3.5;
+    }
+
+    var height = Math.ceil((width * gantt_aspect_height) / gantt_aspect_width) - margin.top - margin.bottom,
         padding = 50;
+
+    $gantt.empty();
 
     var formatMinutes = d3.format('.1f');
     var formatAxis = d3.format('.0f');
@@ -56,7 +68,7 @@ function ganttcharacters() {
         }));
 
         // Add an SVG element for each character, with the desired dimensions and margin.
-        var svg = d3.select("#ganttcharacters").selectAll("svg")
+        var svg = d3.select("#gantt").selectAll("svg")
             .data(characters)
             .enter()
             .append("svg:svg")
@@ -152,4 +164,3 @@ function ganttcharacters() {
         return d === x.domain()[1] ? s + " minutes" : s;
     }
 }
-ganttcharacters()

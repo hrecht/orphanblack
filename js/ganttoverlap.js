@@ -1,4 +1,4 @@
-function ganttoverlap(id) {
+function overlapbuild(id) {
 
     var data = json;
 
@@ -7,11 +7,13 @@ function ganttoverlap(id) {
             right: 40,
             bottom: 40,
             left: 50
-        },
-        width = 1000 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom,
+        };
+    var width = $overlap.width() - margin.left - margin.right,
+        height = Math.ceil((width * overlap_aspect_height) / overlap_aspect_width) - margin.top - margin.bottom,
         padding = 50;
 
+    $overlap.empty();
+    
     var formatMinutes = d3.format('.1f');
     var formatAxis = d3.format('.0f');
 
@@ -26,7 +28,7 @@ function ganttoverlap(id) {
 
     var x = d3.scale.linear()
         .domain([0, 40])
-        .range([padding, width-padding]);
+        .range([padding, width - padding]);
 
     var barcolor = d3.scale.ordinal()
         .domain(["Sarah", "Beth", "Katja", "Alison", "Cosima", "Helena", "Rachel", "Tony"])
@@ -161,8 +163,8 @@ function ganttoverlap(id) {
         .attr("y", -50)
         .attr("width", 58)
         .attr("height", l_h)
-        .attr("class","legendbar overlapbar");
-    
+        .attr("class", "legendbar overlapbar");
+
     legend.append("text")
         .attr("id", function (d) {
             return d;
@@ -182,17 +184,20 @@ function ganttoverlap(id) {
     }
 }
 
-ganttoverlap("#ganttoverlap")
+function overlapdraw() {
+    
+    overlapbuild("#overlap");
 
-var allbars = d3.selectAll("rect");
+    var allbars = d3.selectAll("rect");
 
-allbars.on("mouseover", function () {
-    var moused_id = this.id;
-    allbars.classed("selected", function () {
-        return this.id === moused_id;
-    });
-})
+    allbars.on("mouseover", function () {
+        var moused_id = this.id;
+        allbars.classed("selected", function () {
+            return this.id === moused_id;
+        });
+    })
 
-allbars.on("mouseout", function () {
-    allbars.classed("selected", false);
-})
+    allbars.on("mouseout", function () {
+        allbars.classed("selected", false);
+    })
+}

@@ -31,6 +31,46 @@
     opacity: 0.4;
 }
 
+#gantt {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#gantt img {
+    max-width: 100%;
+    height: auto;
+}
+
+#overlap {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#overlap img {
+    max-width: 100%;
+    height: auto;
+}
+
+#linechart {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#linechart img {
+    max-width: 100%;
+    height: auto;
+}
+
+#barcharts {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#barcharts img {
+    max-width: 100%;
+    height: auto;
+}
+
 .chartline {
     fill: none;
     stroke: #000;
