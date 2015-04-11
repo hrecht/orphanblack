@@ -30,6 +30,9 @@
     fill: #1B3536;
     opacity: 0.4;
 }
+.moblegendbar {
+    fill: #1B3536;
+}
 
 #gantt {
     width: 100%;
@@ -103,6 +106,12 @@
 .legend {
     fill: #fff;
     font-size: 13px;
+    text-align: center;
+}
+
+.legendmob {
+    fill: #fff;
+    font-size: 11px;
     text-align: center;
 }
 

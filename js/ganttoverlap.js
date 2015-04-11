@@ -12,9 +12,9 @@ function overlapbuild(id) {
         padding = 50;
     if ($gantt.width() < mobile_threshold) {
         overlap_aspect_width = 1;
-        overlap_aspect_height = 2;
+        overlap_aspect_height = 1.8;
         numticks = 4;
-        margin.top = 20;
+        margin.top = 70;
         margin.left = 10;
         padding = 10;
     }
@@ -44,6 +44,7 @@ function overlapbuild(id) {
         .range(["#712164", "#d7dddb", "#ffff99", "#e76278", "#4f8a83", "#fac699", "#3A4900", "#666"]);
 
     var legendlabs = ["Sarah", "Alison", "Cosima", "Helena", "Rachel", "Beth", "Katja", "Tony"];
+    var legendmob = ["1", "2", "3", "4"]
 
     var xAxis = d3.svg.axis()
         .scale(x)
@@ -71,7 +72,7 @@ function overlapbuild(id) {
         })
         .classed("minor", true);
 
-    //Season labels for y axis
+    //doing things differently for small vs big screens
     if ($barcharts.width() < mobile_threshold) {
         var gy = svg.append("g")
             .attr("class", "y axis")
@@ -93,7 +94,64 @@ function overlapbuild(id) {
             })
             .attr("y", height + 30)
             .text(function (d) {
-                return "Timeline of Episode";
+                return "Timeline of episode";
+            });
+
+        svg.append("g")
+            .append("text")
+            .attr("class", "seasonTitle")
+            .attr("x", width / 3)
+            .attr("y", -60)
+            .text(function (d) {
+                return "Number of clones";
+            });
+
+        var legend = svg.selectAll("g.legend")
+            .data(legendmob)
+            .enter().append("g");
+
+        var l_w = 40,
+            l_h = 20;
+
+        legend.append("rect")
+            .attr("id", function (d) {
+                return d;
+            })
+            .attr("x", function (d, i) {
+                return (i * l_w) + width / 4;
+            })
+            .attr("y", -50)
+            .attr("width", 30)
+            .attr("height", l_h)
+            .attr("class", "moblegendbar")
+            .attr("opacity", function (d, i) {
+                return (i*0.16) + 0.4;
+            });
+
+        legend.append("text")
+            .attr("id", function (d) {
+                return d;
+            })
+            .attr("x", function (d, i) {
+                return (i * l_w) + width / 4 + 12;
+            })
+            .attr("y", -36)
+            .attr("class", "legendmob")
+            .text(function (d, i) {
+                return legendmob[i];
+            });
+        svg.append("g")
+            .append("line")
+            .attr("class", "labelline")
+            .attr("y1", function (d) {
+                return y(11) - 1;
+            })
+            .attr("y2", function (d) {
+                return y(11) - 1;
+            })
+            .attr("x1", -45)
+            .attr("x2", function (d) {
+                return x(43);
             });
 
     } else {
@@ -129,7 +187,7 @@ function overlapbuild(id) {
             })
             .attr("y", height + 30)
             .text(function (d) {
-                return "Timeline of Episode";
+                return "Timeline of episode";
             });
         svg.append("g")
             .append("text")
