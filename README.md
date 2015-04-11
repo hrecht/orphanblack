@@ -5,6 +5,8 @@ Orphan Black, a scifi thriller from BBC America and Space, stars Canadian actor 
 
 ![Overlapping Tatiana Maslanys](https://raw.githubusercontent.com/hrecht/orphanblack/gh-pages/img/overlapchart.png)
 
+![Bar charts](https://raw.githubusercontent.com/hrecht/orphanblack/gh-pages/img/barchartsfallback.png)
+
 After two seasons, there are 831.5 minutes of Orphan Black and 827.6 minutes of Tatiana Maslany.
 
 The data for this page were collected using a strict, consistent, and highly enjoyable but not peer-reviewed method of rewatching all twenty episodes with a spreadsheet open and one hand on the pause button. Scene changes or other breaks less than 10 seconds were ignored. Recaps, title scenes, credits, and previews were excluded from analysis.
