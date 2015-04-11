@@ -3,7 +3,7 @@ Orphan Black: Data viz.
 
 Orphan Black, a scifi thriller from BBC America and Space, stars Canadian actor Tatiana Maslany as several clones, products of a secret military experiment. All twenty episodes have featured at least one multiple-clone scene. After the first season, a slew of reviews reported that she must be 99 percent of the show. I decided to test that claim.
 
-![Overlapping Tatiana Maslanys](/images/overlapchart.png)
+![Overlapping Tatiana Maslanys](https://raw.githubusercontent.com/hrecht/orphanblack/gh-pages/img/overlapchart.png)
 
 After two seasons, there are 831.5 minutes of Orphan Black and 827.6 minutes of Tatiana Maslany.
 
