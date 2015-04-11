@@ -6,6 +6,7 @@ function bardraw() {
             left: 40
         };
      if ($barcharts.width() < mobile_threshold) {
+        margin.right=15;
         var width = $barcharts.width() - margin.left - margin.right;
     }
     else if (mobile_threshold <= $barcharts.width() && $barcharts.width() < 1000 ) {

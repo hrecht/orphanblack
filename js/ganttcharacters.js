@@ -5,9 +5,11 @@ function ganttdraw() {
         right: 35,
         bottom: 20,
         left: 35
-    };
+    }, padding = 50;
 
     if ($gantt.width() < mobile_threshold) {
+        margin.left = 10;
+        margin.right = 30;
         var width = $gantt.width() - margin.left - margin.right;
     }
     else if (mobile_threshold <= $gantt.width() && $gantt.width() < 1000 ) {
@@ -17,8 +19,8 @@ function ganttdraw() {
         var width = ($gantt.width() - margin.left - margin.right) / 3.5;
     }
 
-    var height = Math.ceil((width * gantt_aspect_height) / gantt_aspect_width) - margin.top - margin.bottom,
-        padding = 50;
+    var height = Math.ceil((width * gantt_aspect_height) / gantt_aspect_width) - margin.top - margin.bottom;
+
 
     $gantt.empty();
 
@@ -38,10 +40,6 @@ function ganttdraw() {
         .tickFormat(formatXAxis)
         .orient("bottom")
         .ticks(5);
-
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        .orient("left");
 
     var tip = d3.tip()
         .attr('class', 'd3-tip')

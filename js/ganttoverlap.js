@@ -8,19 +8,21 @@ function overlapbuild(id) {
             bottom: 40,
             left: 50
         },
-        numticks = 9;
+        numticks = 9,
+        padding = 50;
     if ($gantt.width() < mobile_threshold) {
         overlap_aspect_width = 1;
-        overlap_aspect_height = 1;
+        overlap_aspect_height = 2;
         numticks = 4;
         margin.top = 20;
+        margin.left = 10;
+        padding = 10;
     }
     var width = $overlap.width() - margin.left - margin.right;
-    var height = Math.ceil((width * overlap_aspect_height) / overlap_aspect_width) - margin.top - margin.bottom,
-        padding = 50;
+    var height = Math.ceil((width * overlap_aspect_height) / overlap_aspect_width) - margin.top - margin.bottom;
 
     $overlap.empty();
-    
+
     var formatMinutes = d3.format('.1f');
     var formatAxis = d3.format('.0f');
 
@@ -59,11 +61,6 @@ function overlapbuild(id) {
         return d.episode;
     }));
 
-    var gy = svg.append("g")
-        .attr("class", "y axis")
-        .attr("transform", "translate(" + padding + ",0)")
-        .call(yAxis);
-
     var gx = svg.append("g")
         .attr("class", "x axis")
         //.attr("transform", "translate(0," - height + ")")
@@ -75,60 +72,121 @@ function overlapbuild(id) {
         .classed("minor", true);
 
     //Season labels for y axis
-    svg.append("g")
-        .append("text")
-        .attr("class", "seasonTitle2")
-        .attr("x", -40)
-        .attr("y", function (d) {
-            return y(6) + 6;
-        })
-        .text(function (d) {
-            return "Season 1";
-        });
-    svg.append("g")
-        .append("text")
-        .attr("class", "seasonTitle2")
-        .attr("x", -40)
-        .attr("y", function (d) {
-            return y(16) + 6;
-        })
-        .text(function (d) {
-            return "Season 2";
-        });
-    svg.append("g")
-        .append("text")
-        .attr("class", "seasonTitle")
-        .attr("x", function (d) {
-            return x(0);
-        })
-        .attr("y", height + 30)
-        .text(function (d) {
-            return "Timeline of Episode";
-        });
-    svg.append("g")
-        .append("text")
-        .attr("class", "seasonTitle")
-        .attr("x", function (d) {
-            return x(0) - 25;
-        })
-        .attr("y", -5)
-        .text(function (d) {
-            return "Episode";
-        });
+    if ($barcharts.width() < mobile_threshold) {
+        var gy = svg.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(" + padding + ",0)")
+            .call(yAxis);
+        svg.append("g")
+            .append("text")
+            .attr("class", "seasonTitle")
+            .attr("x", -5)
+            .attr("y", -10)
+            .text(function (d) {
+                return "Episode";
+            });
+        svg.append("g")
+            .append("text")
+            .attr("class", "seasonTitle")
+            .attr("x", function (d) {
+                return x(0);
+            })
+            .attr("y", height + 30)
+            .text(function (d) {
+                return "Timeline of Episode";
+            });
 
-    svg.append("g")
-        .append("line")
-        .attr("class", "labelline")
-        .attr("y1", function (d) {
-            return y(11) - 1;
-        })
-        .attr("y2", function (d) {
-            return y(11) - 1;
-        })
-        .attr("x1", -45)
-        .attr("x2", function (d) {
-            return x(43);
-        });
+    } else {
+        var gy = svg.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(" + padding + ",0)")
+            .call(yAxis);
+        svg.append("g")
+            .append("text")
+            .attr("class", "seasonTitle2")
+            .attr("x", -40)
+            .attr("y", function (d) {
+                return y(6) + 6;
+            })
+            .text(function (d) {
+                return "Season 1";
+            });
+        svg.append("g")
+            .append("text")
+            .attr("class", "seasonTitle2")
+            .attr("x", -40)
+            .attr("y", function (d) {
+                return y(16) + 6;
+            })
+            .text(function (d) {
+                return "Season 2";
+            });
+        svg.append("g")
+            .append("text")
+            .attr("class", "seasonTitle")
+            .attr("x", function (d) {
+                return x(0);
+            })
+            .attr("y", height + 30)
+            .text(function (d) {
+                return "Timeline of Episode";
+            });
+        svg.append("g")
+            .append("text")
+            .attr("class", "seasonTitle")
+            .attr("x", function (d) {
+                return x(0) - 25;
+            })
+            .attr("y", -5)
+            .text(function (d) {
+                return "Episode";
+            });
+
+        var legend = svg.selectAll("g.legend")
+            .data(legendlabs)
+            .enter().append("g");
+
+        var l_w = 65,
+            l_h = 30;
+
+        legend.append("rect")
+            .attr("id", function (d) {
+                return d;
+            })
+            .attr("x", function (d, i) {
+                return (i * l_w) + width / 4;
+            })
+            .attr("y", -50)
+            .attr("width", 58)
+            .attr("height", l_h)
+            .attr("class", "legendbar overlapbar");
+
+        legend.append("text")
+            .attr("id", function (d) {
+                return d;
+            })
+            .attr("x", function (d, i) {
+                return (i * l_w) + width / 4 + 10;
+            })
+            .attr("y", -30)
+            .attr("class", "legend")
+            .text(function (d, i) {
+                return legendlabs[i];
+            });
+        svg.append("g")
+            .append("line")
+            .attr("class", "labelline")
+            .attr("y1", function (d) {
+                return y(11) - 1;
+            })
+            .attr("y2", function (d) {
+                return y(11) - 1;
+            })
+            .attr("x1", -45)
+            .attr("x2", function (d) {
+                return x(43);
+            });
+    }
 
     var segment = svg.selectAll(".bar")
         .data(data)
@@ -153,40 +211,6 @@ function overlapbuild(id) {
             return x(d.stopmin) - x(d.startmin);
         });
 
-    if ($overlap.width() > mobile_threshold) {
-        var legend = svg.selectAll("g.legend")
-        .data(legendlabs)
-        .enter().append("g");
-
-    var l_w = 65,
-        l_h = 30;
-
-    legend.append("rect")
-        .attr("id", function (d) {
-            return d;
-        })
-        .attr("x", function (d, i) {
-            return (i * l_w) + width / 4;
-        })
-        .attr("y", -50)
-        .attr("width", 58)
-        .attr("height", l_h)
-        .attr("class", "legendbar overlapbar");
-
-    legend.append("text")
-        .attr("id", function (d) {
-            return d;
-        })
-        .attr("x", function (d, i) {
-            return (i * l_w) + width / 4 + 10;
-        })
-        .attr("y", -30)
-        .attr("class", "legend")
-        .text(function (d, i) {
-            return legendlabs[i];
-        });
-    }
-
     function formatXAxis(d) {
         var s = formatAxis(d);
         return d === x.domain()[1] ? s + " minutes" : s;
@@ -194,19 +218,22 @@ function overlapbuild(id) {
 }
 
 function overlapdraw() {
-    
-    overlapbuild("#overlap");
 
-    var allbars = d3.selectAll("rect");
+    if ($barcharts.width() < mobile_threshold) {
+        overlapbuild("#overlap");
+    } else {
+        overlapbuild("#overlap");
+        var allbars = d3.selectAll("rect");
 
-    allbars.on("mouseover", function () {
-        var moused_id = this.id;
-        allbars.classed("selected", function () {
-            return this.id === moused_id;
-        });
-    })
+        allbars.on("mouseover", function () {
+            var moused_id = this.id;
+            allbars.classed("selected", function () {
+                return this.id === moused_id;
+            });
+        })
 
-    allbars.on("mouseout", function () {
-        allbars.classed("selected", false);
-    })
+        allbars.on("mouseout", function () {
+            allbars.classed("selected", false);
+        })
+    }
 }
