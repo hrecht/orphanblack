@@ -2,8 +2,8 @@ var mobile_threshold = 600;
 
 var $gantt = $('#gantt');
 var gantt_data_url = "data/obtimes.csv";
-var gantt_aspect_width = 5;
-var gantt_aspect_height = 4;
+var gantt_aspect_width = 10;
+var gantt_aspect_height = 8.5;
 
 var $overlap = $('#overlap');
 var data;

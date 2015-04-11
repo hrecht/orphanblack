@@ -5,8 +5,17 @@ function bardraw() {
             bottom: 40,
             left: 40
         };
-    var width = $barcharts.width() - margin.left - margin.right,
-        height = Math.ceil((width * barcharts_aspect_height) / barcharts_aspect_width) - margin.top - margin.bottom,
+     if ($barcharts.width() < mobile_threshold) {
+        var width = $barcharts.width() - margin.left - margin.right;
+    }
+    else if (mobile_threshold <= $barcharts.width() && $barcharts.width() < 1000 ) {
+        var width = ($barcharts.width() - margin.left - margin.right) / 2.3;
+    }
+    else {
+        var width = ($barcharts.width() - margin.left - margin.right) / 4;
+    }
+    
+    var height = Math.ceil((width * barcharts_aspect_height) / barcharts_aspect_width) - margin.top - margin.bottom,
         padding = -30;
     
     $barcharts.empty();
@@ -43,7 +52,7 @@ function bardraw() {
         .attr('class', 'd3-tip')
         .offset([-10, 0])
         .html(function (d) {
-            return d.character + "<br/>Episode " + d.episode + "<br/>" + formatMinutes(d.minutes) + " minutes";
+            return d.character + "</br>Episode " + d.episode + "<br/>" + formatMinutes(d.minutes) + " minutes";
         })
 
     //just want the main five

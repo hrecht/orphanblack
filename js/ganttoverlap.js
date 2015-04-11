@@ -4,12 +4,19 @@ function overlapbuild(id) {
 
     var margin = {
             top: 50,
-            right: 40,
+            right: 20,
             bottom: 40,
             left: 50
-        };
-    var width = $overlap.width() - margin.left - margin.right,
-        height = Math.ceil((width * overlap_aspect_height) / overlap_aspect_width) - margin.top - margin.bottom,
+        },
+        numticks = 9;
+    if ($gantt.width() < mobile_threshold) {
+        overlap_aspect_width = 1;
+        overlap_aspect_height = 1;
+        numticks = 4;
+        margin.top = 20;
+    }
+    var width = $overlap.width() - margin.left - margin.right;
+    var height = Math.ceil((width * overlap_aspect_height) / overlap_aspect_width) - margin.top - margin.bottom,
         padding = 50;
 
     $overlap.empty();
@@ -41,7 +48,7 @@ function overlapbuild(id) {
         .tickSize(height)
         .tickFormat(formatXAxis)
         .orient("bottom")
-        .ticks(9);
+        .ticks(numticks);
 
     var yAxis = d3.svg.axis()
         .scale(y)
@@ -146,7 +153,8 @@ function overlapbuild(id) {
             return x(d.stopmin) - x(d.startmin);
         });
 
-    var legend = svg.selectAll("g.legend")
+    if ($overlap.width() > mobile_threshold) {
+        var legend = svg.selectAll("g.legend")
         .data(legendlabs)
         .enter().append("g");
 
@@ -177,6 +185,7 @@ function overlapbuild(id) {
         .text(function (d, i) {
             return legendlabs[i];
         });
+    }
 
     function formatXAxis(d) {
         var s = formatAxis(d);

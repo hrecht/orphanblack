@@ -49,9 +49,6 @@ function linedraw() {
     });
 
     x.domain([1, 20]);
-    //y.domain([0, d3.max(data, function (d) {
-    //    return d.tmaspct;
-    //})]);
     y.domain([0, 1.3]);
 
     var gy = svg.append("g")

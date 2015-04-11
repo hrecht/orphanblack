@@ -25,12 +25,12 @@ h6 {
 p {
     margin: 15 0 15px;
     padding-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
     text-align: left;
 }
 
 .about {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .space {
@@ -42,7 +42,7 @@ p {
 }
 
 .lead {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
 }
 
@@ -53,7 +53,7 @@ p {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(../img/oblogopadded.png) no-repeat center center;
+    background: url(../img/obheader.png) no-repeat center center;
     background-size: cover;
 }
 
