@@ -39,10 +39,6 @@ function overlapbuild(id) {
         .domain([0, 40])
         .range([padding, width - padding]);
 
-    var barcolor = d3.scale.ordinal()
-        .domain(["Sarah", "Beth", "Katja", "Alison", "Cosima", "Helena", "Rachel", "Tony"])
-        .range(["#712164", "#d7dddb", "#ffff99", "#e76278", "#4f8a83", "#fac699", "#3A4900", "#666"]);
-
     var legendlabs = ["Sarah", "Alison", "Cosima", "Helena", "Rachel", "Beth", "Katja", "Tony"];
     var legendmob = ["1", "2", "3", "4"]
 
